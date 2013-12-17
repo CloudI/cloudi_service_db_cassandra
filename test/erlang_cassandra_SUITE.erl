@@ -13,7 +13,7 @@
 
 -include_lib("proper/include/proper.hrl").
 -include_lib("common_test/include/ct.hrl").
--include_lib("erlang_cassandra/include/cassandra_types.hrl").
+-include_lib("erlang_cassandra/include/erlang_cassandra_types.hrl").
 -include_lib("cloudi_core/include/cloudi_logger.hrl").
 
 -compile(export_all).
