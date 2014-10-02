@@ -49,7 +49,7 @@ defmodule CloudIServiceDbCassandra do
 
   defp package do
     [files: ~w(src doc test rebar.config README.markdown),
-     contributors: ["Michael Truog"],
+     contributors: ["Mahesh Paolini-Subramanya", "Michael Truog"],
      licenses: ["BSD"],
      links: %{"Website" => "http://cloudi.org",
               "GitHub" => "https://github.com/CloudI/" <>
