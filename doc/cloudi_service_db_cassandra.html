@@ -17,7 +17,7 @@
            https://github.com/dieswaytoofast/erlang_cassandra<code>Note that your results are "double ok"</code>d.
 <p>Copyright © 2013-2014 Mahesh Paolini-Subramanya</p>
 
-<p><b>Version:</b> 1.4.0 Dec 20 2014 15:43:00
+<p><b>Version:</b> 1.5.0 Apr 12 2015 21:01:21
   ------------------------------------------------------------------------</p>
 <p><b>Behaviours:</b> <a href="deps/cloudi_core/doc/cloudi_service.html"><tt>cloudi_service</tt></a>.</p>
 <p><b>Authors:</b> Mahesh Paolini-Subramanya (<a href="mailto:mahesh@dieswaytoofast.com"><tt>mahesh@dieswaytoofast.com</tt></a>).</p>
@@ -34,6 +34,10 @@
            {ok, {error, Reason}}
        send_sync errors will be standard 'cloudi' errors
 <h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-agent">agent()</a></h3>
+<p><tt>agent() = <a href="deps/cloudi_core/doc/cloudi.html#type-agent">cloudi:agent()</a></tt></p>
+
 
 <h3 class="typedecl"><a name="type-client_name">client_name()</a></h3>
 <p><tt>client_name() = binary()</tt></p>
@@ -87,12 +91,8 @@
 <p><tt>destination() = <a href="#type-server_ref">server_ref()</a> | <a href="#type-fq_server_ref">fq_server_ref()</a></tt></p>
 
 
-<h3 class="typedecl"><a name="type-dispatcher">dispatcher()</a></h3>
-<p><tt>dispatcher() = <a href="deps/cloudi_core/doc/cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a> | <a href="deps/cloudi_core/doc/cloudi.html#type-context">cloudi:context()</a></tt></p>
-
-
-<h3 class="typedecl"><a name="type-error">error()</a></h3>
-<p><tt>error() = {error, Reason::term()}</tt></p>
+<h3 class="typedecl"><a name="type-external_response">external_response()</a></h3>
+<p><tt>external_response(Result) = {{ok, Result}, NewAgent::<a href="#type-agent">agent()</a>} | {{error, <a href="deps/cloudi_core/doc/cloudi.html#type-error_reason_sync">cloudi:error_reason_sync()</a>}, NewAgent::<a href="#type-agent">agent()</a>}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-fq_server_ref">fq_server_ref()</a></h3>
@@ -108,11 +108,7 @@
 
 
 <h3 class="typedecl"><a name="type-name">name()</a></h3>
-<p><tt>name() = <a href="deps/cloudi_core/doc/cloudi_service.html#type-service_name">cloudi_service:service_name()</a></tt></p>
-
-
-<h3 class="typedecl"><a name="type-response">response()</a></h3>
-<p><tt>response() = [tuple()] | <a href="#type-error">error()</a></tt></p>
+<p><tt>name() = <a href="deps/cloudi_core/doc/cloudi.html#type-service_name">cloudi:service_name()</a></tt></p>
 
 
 <h3 class="typedecl"><a name="type-row_key">row_key()</a></h3>
@@ -180,7 +176,7 @@
 
 <h3 class="function"><a name="add-7">add/7</a></h3>
 <div class="spec">
-<p><tt>add(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, CounterColumn::<a href="#type-counter_column">counter_column()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>add(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, CounterColumn::<a href="#type-counter_column">counter_column()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Increment a counter column</p>
 
 <h3 class="function"><a name="cloudi_service_handle_info-3">cloudi_service_handle_info/3</a></h3>
@@ -205,159 +201,159 @@
 
 <h3 class="function"><a name="describe_cluster_name-2">describe_cluster_name/2</a></h3>
 <div class="spec">
-<p><tt>describe_cluster_name(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>describe_cluster_name(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get the cluster_name</p>
 
 <h3 class="function"><a name="describe_keyspace-3">describe_keyspace/3</a></h3>
 <div class="spec">
-<p><tt>describe_keyspace(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>describe_keyspace(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Describe the keyspace used by the connection</p>
 
 <h3 class="function"><a name="describe_keyspaces-2">describe_keyspaces/2</a></h3>
 <div class="spec">
-<p><tt>describe_keyspaces(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>describe_keyspaces(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get the list of all the keyspaces</p>
 
 <h3 class="function"><a name="describe_partitioner-2">describe_partitioner/2</a></h3>
 <div class="spec">
-<p><tt>describe_partitioner(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>describe_partitioner(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get the partitioner used for the cluster</p>
 
 <h3 class="function"><a name="describe_ring-3">describe_ring/3</a></h3>
 <div class="spec">
-<p><tt>describe_ring(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>describe_ring(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Gets the token ring; a map of ranges to host addresses</p>
 
 <h3 class="function"><a name="describe_schema_versions-2">describe_schema_versions/2</a></h3>
 <div class="spec">
-<p><tt>describe_schema_versions(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>describe_schema_versions(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get the schema_versions used for the cluster</p>
 
 <h3 class="function"><a name="describe_snitch-2">describe_snitch/2</a></h3>
 <div class="spec">
-<p><tt>describe_snitch(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>describe_snitch(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get the snitch used for the cluster</p>
 
 <h3 class="function"><a name="describe_version-2">describe_version/2</a></h3>
 <div class="spec">
-<p><tt>describe_version(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>describe_version(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get the Thrift API version</p>
 
 <h3 class="function"><a name="execute_cql_query-4">execute_cql_query/4</a></h3>
 <div class="spec">
-<p><tt>execute_cql_query(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, CqlQuery::<a href="#type-cql_query">cql_query()</a>, Compression::<a href="#type-compression">compression()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>execute_cql_query(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, CqlQuery::<a href="#type-cql_query">cql_query()</a>, Compression::<a href="#type-compression">compression()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Execute a CQL query</p>
 
 <h3 class="function"><a name="execute_prepared_cql_query-4">execute_prepared_cql_query/4</a></h3>
 <div class="spec">
-<p><tt>execute_prepared_cql_query(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, CqlQuery::<a href="#type-cql_query_id">cql_query_id()</a>, Values::list()) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>execute_prepared_cql_query(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, CqlQuery::<a href="#type-cql_query_id">cql_query_id()</a>, Values::list()) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Execute a prepared a CQL query</p>
 
 <h3 class="function"><a name="get-6">get/6</a></h3>
 <div class="spec">
-<p><tt>get(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnPath::<a href="#type-column_path">column_path()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>get(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnPath::<a href="#type-column_path">column_path()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get a column</p>
 
 <h3 class="function"><a name="get_count-7">get_count/7</a></h3>
 <div class="spec">
-<p><tt>get_count(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, SlicePredicate::<a href="#type-slice_predicate">slice_predicate()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>get_count(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, SlicePredicate::<a href="#type-slice_predicate">slice_predicate()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Count columns based on a slice
        WARNING: NOT O(1)</p>
 
 <h3 class="function"><a name="get_indexed_slices-7">get_indexed_slices/7</a></h3>
 <div class="spec">
-<p><tt>get_indexed_slices(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, IndexClause::<a href="#type-slice_predicate">slice_predicate()</a>, SlicePredicate::<a href="#type-key_range">key_range()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>get_indexed_slices(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, IndexClause::<a href="#type-slice_predicate">slice_predicate()</a>, SlicePredicate::<a href="#type-key_range">key_range()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get a list of slices using IndexRange</p>
 
 <h3 class="function"><a name="get_range_slices-7">get_range_slices/7</a></h3>
 <div class="spec">
-<p><tt>get_range_slices(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, SlicePredicate::<a href="#type-slice_predicate">slice_predicate()</a>, KeyRange::<a href="#type-key_range">key_range()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>get_range_slices(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, SlicePredicate::<a href="#type-slice_predicate">slice_predicate()</a>, KeyRange::<a href="#type-key_range">key_range()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get a list of slices for the keys within the specified KeyRange</p>
 
 <h3 class="function"><a name="get_slice-7">get_slice/7</a></h3>
 <div class="spec">
-<p><tt>get_slice(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, SlicePredicate::<a href="#type-slice_predicate">slice_predicate()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>get_slice(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, SlicePredicate::<a href="#type-slice_predicate">slice_predicate()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get a group of columns based on a slice</p>
 
 <h3 class="function"><a name="insert-7">insert/7</a></h3>
 <div class="spec">
-<p><tt>insert(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, Column::<a href="#type-column">column()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>insert(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnParent::<a href="#type-column_parent">column_parent()</a>, Column::<a href="#type-column">column()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Insert a column</p>
 
 <h3 class="function"><a name="multiget_count-7">multiget_count/7</a></h3>
 <div class="spec">
-<p><tt>multiget_count(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKeys::[<a href="#type-row_key">row_key()</a>], ColumnParent::<a href="#type-column_parent">column_parent()</a>, SlicePredicate::<a href="#type-slice_predicate">slice_predicate()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>multiget_count(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKeys::[<a href="#type-row_key">row_key()</a>], ColumnParent::<a href="#type-column_parent">column_parent()</a>, SlicePredicate::<a href="#type-slice_predicate">slice_predicate()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Count columns based on a slice and a list of rows
        WARNING: NOT O(1)</p>
 
 <h3 class="function"><a name="multiget_slice-7">multiget_slice/7</a></h3>
 <div class="spec">
-<p><tt>multiget_slice(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKeys::[<a href="#type-row_key">row_key()</a>], ColumnParent::<a href="#type-column_parent">column_parent()</a>, SlicePredicate::<a href="#type-slice_predicate">slice_predicate()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>multiget_slice(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKeys::[<a href="#type-row_key">row_key()</a>], ColumnParent::<a href="#type-column_parent">column_parent()</a>, SlicePredicate::<a href="#type-slice_predicate">slice_predicate()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get a group of columns based on a slice and a list of rows</p>
 
 <h3 class="function"><a name="prepare_cql_query-4">prepare_cql_query/4</a></h3>
 <div class="spec">
-<p><tt>prepare_cql_query(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, CqlQuery::<a href="#type-cql_query">cql_query()</a>, Compression::<a href="#type-compression">compression()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>prepare_cql_query(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, CqlQuery::<a href="#type-cql_query">cql_query()</a>, Compression::<a href="#type-compression">compression()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Prepare a CQL query</p>
 
 <h3 class="function"><a name="remove-7">remove/7</a></h3>
 <div class="spec">
-<p><tt>remove(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnPath::<a href="#type-column_path">column_path()</a>, ColumnTimestamp::<a href="#type-column_timestamp">column_timestamp()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>remove(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnPath::<a href="#type-column_path">column_path()</a>, ColumnTimestamp::<a href="#type-column_timestamp">column_timestamp()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Remove data from the row specified by key at the granularity
        specified by column_path, and the given timestamp</p>
 
 <h3 class="function"><a name="remove_counter-6">remove_counter/6</a></h3>
 <div class="spec">
-<p><tt>remove_counter(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnPath::<a href="#type-column_path">column_path()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>remove_counter(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, RowKey::<a href="#type-row_key">row_key()</a>, ColumnPath::<a href="#type-column_path">column_path()</a>, ConsistencyLevel::<a href="#type-consistency_level">consistency_level()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Remove a counter</p>
 
 <h3 class="function"><a name="set_keyspace-3">set_keyspace/3</a></h3>
 <div class="spec">
-<p><tt>set_keyspace(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>set_keyspace(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Set the keyspace to be used by the connection</p>
 
 <h3 class="function"><a name="system_add_column_family-3">system_add_column_family/3</a></h3>
 <div class="spec">
-<p><tt>system_add_column_family(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, ColumnFamilyDefinition::<a href="#type-column_family_definition">column_family_definition()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>system_add_column_family(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, ColumnFamilyDefinition::<a href="#type-column_family_definition">column_family_definition()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Add a column family</p>
 
 <h3 class="function"><a name="system_add_keyspace-3">system_add_keyspace/3</a></h3>
 <div class="spec">
-<p><tt>system_add_keyspace(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, KeyspaceDefinition::<a href="#type-keyspace_definition">keyspace_definition()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>system_add_keyspace(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, KeyspaceDefinition::<a href="#type-keyspace_definition">keyspace_definition()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Add a keyspace</p>
 
 <h3 class="function"><a name="system_describe_column_family-4">system_describe_column_family/4</a></h3>
 <div class="spec">
-<p><tt>system_describe_column_family(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, ColumnFamily::<a href="#type-column_family">column_family()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>system_describe_column_family(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, ColumnFamily::<a href="#type-column_family">column_family()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Get the column family definition</p>
 
 <h3 class="function"><a name="system_drop_column_family-4">system_drop_column_family/4</a></h3>
 <div class="spec">
-<p><tt>system_drop_column_family(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, ColumnFamily::<a href="#type-column_family">column_family()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>system_drop_column_family(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, ColumnFamily::<a href="#type-column_family">column_family()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Drop a column family</p>
 
 <h3 class="function"><a name="system_drop_keyspace-3">system_drop_keyspace/3</a></h3>
 <div class="spec">
-<p><tt>system_drop_keyspace(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>system_drop_keyspace(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Remove a keyspace</p>
 
 <h3 class="function"><a name="system_update_column_family-3">system_update_column_family/3</a></h3>
 <div class="spec">
-<p><tt>system_update_column_family(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, ColumnFamilyDefinition::<a href="#type-column_family_definition">column_family_definition()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>system_update_column_family(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, ColumnFamilyDefinition::<a href="#type-column_family_definition">column_family_definition()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Update a column family</p>
 
 <h3 class="function"><a name="system_update_keyspace-3">system_update_keyspace/3</a></h3>
 <div class="spec">
-<p><tt>system_update_keyspace(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, KeyspaceDefinition::<a href="#type-keyspace_definition">keyspace_definition()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>system_update_keyspace(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, KeyspaceDefinition::<a href="#type-keyspace_definition">keyspace_definition()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Update a keyspace</p>
 
 <h3 class="function"><a name="truncate-4">truncate/4</a></h3>
 <div class="spec">
-<p><tt>truncate(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, ColumnFamily::<a href="#type-column_family">column_family()</a>) -&gt; <a href="#type-response">response()</a></tt><br></p>
+<p><tt>truncate(Agent::<a href="#type-agent">agent()</a>, Name::<a href="#type-name">name()</a>, Destination::<a href="#type-destination">destination()</a>, ColumnFamily::<a href="#type-column_family">column_family()</a>) -&gt; <a href="#type-external_response">external_response</a>(any())</tt><br></p>
 </div><p>Remove all rows from a column family</p>
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Dec 20 2014, 15:43:00.</i></p>
+<p><i>Generated by EDoc, Apr 12 2015, 21:01:22.</i></p>
 </body>
 </html>

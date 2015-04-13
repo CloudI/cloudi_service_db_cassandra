@@ -3,7 +3,7 @@ defmodule CloudIServiceDbCassandra do
 
   def project do
     [app: :cloudi_service_db_cassandra,
-     version: "1.4.0",
+     version: "1.5.0",
      language: :erlang,
      description: description,
      package: package,
@@ -21,9 +21,9 @@ defmodule CloudIServiceDbCassandra do
      {:poolboy, "~> 1.4.0", override: true}, # override for 17.x types
      # confirm dependencies due to erlang_cassandra
      {:jsx, "~> 2.1.1", override: true},
-     {:reltool_util, "~> 1.4.0", override: true},
-     {:uuid, "~> 1.4.0", hex: :uuid_erl},
-     {:cloudi_core, "~> 1.4.0"}]
+     {:reltool_util, "~> 1.5.0", override: true},
+     {:uuid, "~> 1.5.0", hex: :uuid_erl},
+     {:cloudi_core, "~> 1.5.0"}]
   end
 
   defp description do
