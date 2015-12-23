@@ -17,7 +17,7 @@
            https://github.com/dieswaytoofast/erlang_cassandra<code>Note that your results are "double ok"</code>d.
 <p>Copyright © 2013-2014 Mahesh Paolini-Subramanya</p>
 
-<p><b>Version:</b> 1.5.0 Apr 12 2015 21:01:21
+<p><b>Version:</b> 1.5.0 Dec 23 2015 14:25:28
   ------------------------------------------------------------------------</p>
 <p><b>Behaviours:</b> <a href="deps/cloudi_core/doc/cloudi_service.html"><tt>cloudi_service</tt></a>.</p>
 <p><b>Authors:</b> Mahesh Paolini-Subramanya (<a href="mailto:mahesh@dieswaytoofast.com"><tt>mahesh@dieswaytoofast.com</tt></a>).</p>
@@ -52,7 +52,7 @@
 
 
 <h3 class="typedecl"><a name="type-column_family_definition">column_family_definition()</a></h3>
-<p><tt>column_family_definition() = #cfDef{keyspace = undefined | string() | binary(), name = undefined | string() | binary(), column_type = string() | binary(), comparator_type = string() | binary(), subcomparator_type = undefined | string() | binary(), comment = undefined | string() | binary(), read_repair_chance = undefined | float(), column_metadata = undefined | list(), gc_grace_seconds = undefined | integer(), default_validation_class = undefined | string() | binary(), id = undefined | integer(), min_compaction_threshold = undefined | integer(), max_compaction_threshold = undefined | integer(), replicate_on_write = undefined | boolean(), key_validation_class = undefined | string() | binary(), key_alias = undefined | string() | binary(), compaction_strategy = undefined | string() | binary(), compaction_strategy_options = undefined | dict(), compression_options = undefined | dict(), bloom_filter_fp_chance = undefined | float(), caching = string() | binary(), dclocal_read_repair_chance = float(), populate_io_cache_on_flush = undefined | boolean(), row_cache_size = undefined | float(), key_cache_size = undefined | float(), row_cache_save_period_in_seconds = undefined | integer(), key_cache_save_period_in_seconds = undefined | integer(), memtable_flush_after_mins = undefined | integer(), memtable_throughput_in_mb = undefined | integer(), memtable_operations_in_millions = undefined | float(), merge_shards_chance = undefined | float(), row_cache_provider = undefined | string() | binary(), row_cache_keys_to_save = undefined | integer()}</tt></p>
+<p><tt>column_family_definition() = #cfDef{keyspace = undefined | string() | binary(), name = undefined | string() | binary(), column_type = string() | binary(), comparator_type = string() | binary(), subcomparator_type = undefined | string() | binary(), comment = undefined | string() | binary(), read_repair_chance = undefined | float(), column_metadata = undefined | list(), gc_grace_seconds = undefined | integer(), default_validation_class = undefined | string() | binary(), id = undefined | integer(), min_compaction_threshold = undefined | integer(), max_compaction_threshold = undefined | integer(), replicate_on_write = undefined | boolean(), key_validation_class = undefined | string() | binary(), key_alias = undefined | string() | binary(), compaction_strategy = undefined | string() | binary(), compaction_strategy_options = undefined | <a href="dict.html#type-dict">dict:dict()</a>, compression_options = undefined | <a href="dict.html#type-dict">dict:dict()</a>, bloom_filter_fp_chance = undefined | float(), caching = string() | binary(), dclocal_read_repair_chance = float(), populate_io_cache_on_flush = undefined | boolean(), row_cache_size = undefined | float(), key_cache_size = undefined | float(), row_cache_save_period_in_seconds = undefined | integer(), key_cache_save_period_in_seconds = undefined | integer(), memtable_flush_after_mins = undefined | integer(), memtable_throughput_in_mb = undefined | integer(), memtable_operations_in_millions = undefined | float(), merge_shards_chance = undefined | float(), row_cache_provider = undefined | string() | binary(), row_cache_keys_to_save = undefined | integer()}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-column_parent">column_parent()</a></h3>
@@ -104,7 +104,7 @@
 
 
 <h3 class="typedecl"><a name="type-keyspace_definition">keyspace_definition()</a></h3>
-<p><tt>keyspace_definition() = #ksDef{name = undefined | string() | binary(), strategy_class = undefined | string() | binary(), strategy_options = undefined | dict(), replication_factor = undefined | integer(), cf_defs = list(), durable_writes = boolean()}</tt></p>
+<p><tt>keyspace_definition() = #ksDef{name = undefined | string() | binary(), strategy_class = undefined | string() | binary(), strategy_options = undefined | <a href="dict.html#type-dict">dict:dict()</a>, replication_factor = undefined | integer(), cf_defs = list(), durable_writes = boolean()}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-name">name()</a></h3>
@@ -354,6 +354,6 @@
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Apr 12 2015, 21:01:22.</i></p>
+<p><i>Generated by EDoc, Dec 23 2015, 14:25:28.</i></p>
 </body>
 </html>

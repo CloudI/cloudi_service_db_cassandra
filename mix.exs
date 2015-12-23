@@ -3,7 +3,7 @@ defmodule CloudIServiceDbCassandra do
 
   def project do
     [app: :cloudi_service_db_cassandra,
-     version: "1.5.0",
+     version: "1.5.1",
      language: :erlang,
      description: description,
      package: package,
@@ -18,12 +18,12 @@ defmodule CloudIServiceDbCassandra do
      {:proper,
       [git: "https://github.com/manopapad/proper.git",
        ref: "master"]},
-     {:poolboy, "~> 1.4.0", override: true}, # override for 17.x types
+     {:poolboy, "~> 1.4.2", override: true},
      # confirm dependencies due to erlang_cassandra
      {:jsx, "~> 2.1.1", override: true},
-     {:reltool_util, "~> 1.5.0", override: true},
-     {:uuid, "~> 1.5.0", hex: :uuid_erl},
-     {:cloudi_core, "~> 1.5.0"}]
+     {:reltool_util, "~> 1.5.1", override: true},
+     {:uuid, "~> 1.5.1", hex: :uuid_erl},
+     {:cloudi_core, "~> 1.5.1"}]
   end
 
   defp description do
@@ -32,7 +32,7 @@ defmodule CloudIServiceDbCassandra do
 
   defp package do
     [files: ~w(src doc test rebar.config README.markdown),
-     contributors: ["Mahesh Paolini-Subramanya", "Michael Truog"],
+     maintainers: ["Mahesh Paolini-Subramanya", "Michael Truog"],
      licenses: ["BSD"],
      links: %{"Website" => "http://cloudi.org",
               "GitHub" => "https://github.com/CloudI/" <>
